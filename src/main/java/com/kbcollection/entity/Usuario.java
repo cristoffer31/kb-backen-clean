@@ -30,4 +30,6 @@ public class Usuario extends PanacheEntity {
 
     // --- NUEVO: BLOQUEO DE CUENTA ---
     public boolean activo = true; // Si es false, no puede entrar
+
+    public String telefono;
 }

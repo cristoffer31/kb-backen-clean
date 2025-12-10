@@ -12,6 +12,8 @@ public class CheckoutRequest {
     public List<Item> items;
     public String cupon;
     public String metodoPago;
+
+    public String telefono;
     
     public String direccion;
     public String departamento;

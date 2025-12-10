@@ -22,6 +22,7 @@ public class UsuarioService {
         u.email = dto.email;
         u.passwordHash = BCrypt.withDefaults().hashToString(12, dto.password.toCharArray());
         u.role = "USER";
+        u.telefono = dto.telefono;
         
         u.verificado = false;
         u.tokenVerificacion = UUID.randomUUID().toString();

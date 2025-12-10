@@ -94,6 +94,7 @@ public class CheckoutResource {
         pedido.metodoPago = req.metodoPago != null ? req.metodoPago : "PAYPAL";
         pedido.status = "PENDIENTE"; 
         pedido.direccion = req.direccion;
+        pedido.telefono = req.telefono;
         pedido.departamento = req.departamento;
         pedido.coordenadas = req.coordenadas;
         pedido.paypalOrderId = req.paypalOrderId;
@@ -158,5 +159,20 @@ public class CheckoutResource {
         if(p == null) return Response.status(404).build();
         if(body.containsKey("status")) p.status = body.get("status");
         return Response.ok(Map.of("mensaje", "Estado actualizado")).build();
+    }
+
+    @GET
+    @Path("/usuario/{id}")
+    @RolesAllowed({"ADMIN", "SUPER_ADMIN"})
+    public List<Pedido> historialUsuario(@PathParam("id") Long id) {
+        // Buscamos pedidos donde el usuario.id coincida, ordenados por el más reciente
+        return Pedido.find("usuario.id", Sort.descending("id"), id).list();
+    }
+
+    @GET
+    @Path("/conteo-pendientes")
+    @RolesAllowed({"ADMIN", "SUPER_ADMIN"})
+    public long contarPendientes() {
+        return Pedido.count("status", "PENDIENTE");
     }
 }

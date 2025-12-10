@@ -13,6 +13,7 @@ public class Pedido extends PanacheEntity {
     public double descuento;
     public double costoEnvio;
     public double total;
+    public String telefono;
 
     @Column(length = 50)
     public String metodoPago;
